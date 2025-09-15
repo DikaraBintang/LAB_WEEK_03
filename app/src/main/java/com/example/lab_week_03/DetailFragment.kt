@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,7 +46,13 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val coffeeId = arguments?.getInt(COFFEE_ID, 0) ?: 0
         setCoffeeData(coffeeId)
+        val backButton = view.findViewById<Button>(R.id.button)
+
+        backButton.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
+
     fun setCoffeeData(id: Int){
         when(id){
             R.id.affogato -> {
@@ -58,6 +66,15 @@ class DetailFragment : Fragment() {
             R.id.latte -> {
                 coffeeTitle?.text = getString(R.string.latte_title)
                 coffeeDesc?.text = getString(R.string.latte_desc)
+            }
+            R.id.cappuccino -> {
+                coffeeTitle?.text = "CAPPUCCINO"
+                coffeeDesc?.text = getString(R.string.cappuccino_desc)
+            }
+
+            R.id.macchiato -> {
+                coffeeTitle?.text = "MACCHIATO"
+                coffeeDesc?.text = getString(R.string.macchiato_desc)
             }
         }
     }
